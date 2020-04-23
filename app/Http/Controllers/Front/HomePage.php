@@ -23,6 +23,7 @@ class HomePage extends Controller
         }
         view()->share('pages', Page::orderBy('order', 'ASC')->whereStatus(1)->get());
         view()->share('categories', Category::where('status', 1)->inRandomOrder()->get());
+        view()->share('config', Config::find(1));
     }
     public function index()
     {
