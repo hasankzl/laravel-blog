@@ -22,7 +22,7 @@ class HomePage extends Controller
             return redirect()->to('aktif-degil')->send();
         }
         view()->share('pages', Page::orderBy('order', 'ASC')->whereStatus(1)->get());
-        view()->share('categories', Category::where('status', 1)->inRandomOrder()->get());
+        view()->share('categories', Category::where('status', 1)->get());
         view()->share('config', Config::find(1));
     }
     public function index()
@@ -35,7 +35,7 @@ class HomePage extends Controller
         )
       ->orderBy('created_at', 'DESC')->paginate(10);
         $data['articles']->withPath(url('/sayfa'));
-        return view('Front.homepage', $data);
+        return view('front.homepage', $data);
     }
 
     public function single($category, $slug)
@@ -53,14 +53,13 @@ class HomePage extends Controller
     {
         $category = Category::whereSlug($slug)->first() ?? abort(403, "Böyle bir kategori bulunamadı.");
         $data['category']=$category;
-        $data['articles'] = Article::whereCategoryId($category->id)->whereStatus(1)->orderBy('created_at', 'DESC')->paginate(1);
+        $data['articles'] = Article::whereCategoryId($category->id)->whereStatus(1)->orderBy('created_at', 'DESC')->paginate(3);
         return view('front.category', $data);
     }
 
     public function page($slug)
     {
         $page=Page::whereSlug($slug)->first() ?? abort(403, "Böyle bir sayfa bulunamadı.");
-        $data['pages']=Page::orderBy('order', 'ASC')->get();
         $data['page']=$page;
         return view("front.page", $data);
     }

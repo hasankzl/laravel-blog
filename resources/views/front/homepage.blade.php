@@ -4,11 +4,11 @@
 
 
       <div class=" col-md-9 mx-auto">
-        @include('front.Widgets.ArticleList')
+        @include('front.widgets.articleList')
         <!-- Pager -->
         <div class="clearfix">
           <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
         </div>
       </div>
-@include('Front\Widgets\Category')
+@include('front.widgets.category')
 @endsection

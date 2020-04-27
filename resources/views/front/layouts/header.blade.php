@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>@yield('title','Blog Sitesi') - {{$config->title}}</title>
+  <title>@yield('title','Devletimiz') - {{$config->title}}</title>
   <link rel="shortcut icon" type="image/png" href="{{asset($config->favicon)}}"/>
   <!-- Bootstrap core CSS -->
   <link href="{{asset('front/')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,6 +43,11 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('homepage')}}">Anasayfa</a>
           </li>
+          @foreach($categories as $category)
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('category',$category->slug)}}">{{$category->name}}</a>
+          </li>
+          @endforeach
           @foreach($pages as $page)
           <li class="nav-item">
             <a class="nav-link" href="{{route('page',$page->slug)}}">{{$page->title}}</a>

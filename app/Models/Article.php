@@ -13,4 +13,12 @@ class Article extends Model
     {
         return $this->hasOne('App\Models\Category', 'id', 'category_id');
     }
+    public function getMaker()
+    {
+        return $this->hasOne('App\Models\Maker', 'id', 'maker_id');
+    }
+    public function getCity()
+    {
+        return $this->hasOne('App\Models\City', 'id', 'city_id');
+    }
 }

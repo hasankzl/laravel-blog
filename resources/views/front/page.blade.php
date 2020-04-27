@@ -11,5 +11,4 @@
       </div>
 
 
-@include('Front\Widgets\Category')
 @endsection

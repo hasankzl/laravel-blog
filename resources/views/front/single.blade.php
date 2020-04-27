@@ -3,9 +3,13 @@
 @section('content')
 @section('bg',asset($article->image))
 
-      <div class="col-md-9 mx-auto">
-        <h2>{{$article->title}}</h2>
-    <img src="{{asset($article->image)}}" /> <br>
+      <div class="col-md-12 mx-auto">
+
+<div class="text-center">
+  <h2 class="mb-4">{{$article->title}}</h2>
+  <img  src="{{asset($article->image)}}" width="600"/> <br><hr><br>
+
+</div>
     <p>
       {!!$article->content!!}
     </p>
@@ -15,5 +19,4 @@
       </div>
 
 
-@include('Front\Widgets\Category')
 @endsection

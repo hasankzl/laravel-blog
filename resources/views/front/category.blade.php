@@ -1,10 +1,11 @@
 @extends('front.layouts.master')
-@section('title',$category->name.' Katagorisi |'.count($articles).' Yazı bulundu')
+@section('title',$category->name.' Katagorisi |'.count($articles).' Yapı Bulundu')
+@section('bg',asset($category->image))
 @section('content')
 
 
       <div class=" col-md-9 mx-auto">
-      @include('front.Widgets.ArticleList')
+      @include('front.widgets.articleList')
     </div>
-@include('Front\Widgets\Category')
+@include('front.widgets.category')
 @endsection

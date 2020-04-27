@@ -32,6 +32,35 @@ seçim yapınız
     </select>
   </div>
   <div class="form-group">
+    <label>Yapan Kişi/Kurum</label>
+    <select class="form-control" name="maker" required>
+<option value="">
+seçim yapınız
+</option>
+@foreach($makers as $maker)
+<option value="{{$maker->id}}">{{$maker->name}}</option>
+@endforeach
+    </select>
+  </div>
+  <div class="form-group">
+      <label for="">Adres</label>
+<div class="row">
+<div class="col-md-6">
+  <select class="form-control" name="city" required>
+  <option value="">
+  sehir seçiniz
+  </option>
+  @foreach($cities as $city)
+  <option value="{{$city->id}}">{{$city->name}}</option>
+  @endforeach
+  </select>
+</div>
+<div class="col-md-6">
+<input type="text" name="fullAddress" class="form-control" value="" required placeholder="tam adresi giriniz"/>
+</div>
+</div>
+  </div>
+  <div class="form-group">
     <label>Makale Fotoğrafı</label>
     <input type="file" name="image" class="form-control" required />
   </div>

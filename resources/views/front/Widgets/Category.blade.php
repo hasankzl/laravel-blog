@@ -1,6 +1,6 @@
 @isset($categories)
-      <div class="col-md-3">
-        <div class="card">
+      <div class="col-md-3 text-center">
+        <div class="card w-100 ">
           <div class="card-header">
             Kategoriler
           </div>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Maker;
+use App\Models\City;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -31,7 +33,9 @@ class ArticleController extends Controller
     public function create()
     {
         $categories=Category::All();
-        return view('back.articles.create', compact('categories'));
+        $makers=Maker::All();
+        $cities=City::All();
+        return view('back.articles.create', compact('categories', 'makers', 'cities'));
     }
 
     /**
@@ -50,6 +54,9 @@ class ArticleController extends Controller
         $article->title=$request->title;
         $article->category_id=$request->category;
         $article->content=$request->content;
+        $article->maker_id=$request->maker;
+        $article->city_id=$request->city;
+        $article->fullAddress=$request->fullAddress;
         $article->slug=Str::slug($request->title);
 
 
@@ -92,7 +99,9 @@ class ArticleController extends Controller
     {
         $article=Article::findOrFail($id);
         $categories=Category::All();
-        return view('back.articles.update', compact('categories', 'article'));
+        $makers=Maker::All();
+        $cities=City::All();
+        return view('back.articles.update', compact('categories', 'makers', 'cities', 'article'));
     }
 
     /**
@@ -112,6 +121,9 @@ class ArticleController extends Controller
         $article->title=$request->title;
         $article->category_id=$request->category;
         $article->content=$request->content;
+        $article->maker_id=$request->maker;
+        $article->city_id=$request->city;
+        $article->fullAddress=$request->fullAddress;
         $article->slug=Str::slug($request->title);
 
 

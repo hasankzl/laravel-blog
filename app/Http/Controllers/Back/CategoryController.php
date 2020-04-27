@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Article;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -35,9 +36,15 @@ class CategoryController extends Controller
             toastr()->error($request->category.'adında bir kategori bulunmaktadır');
             return redirect()->back();
         }
+
         $category = new Category;
         $category->name=$request->category;
         $category->slug=Str::slug($request->category);
+        if ($request->hasFile('image')) {
+            $imageName=Str::slug($request->category).'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads'), $imageName);
+            $category->image='uploads/'.$imageName;
+        }
         $category->save();
         toastr()->success('Kategori başarıyla oluşturuldu');
         return redirect()->back();
@@ -58,7 +65,11 @@ class CategoryController extends Controller
         } else {
             $category->slug=Str::slug($request->slug);
         }
-
+        if ($request->hasFile('image')) {
+            $imageName=Str::slug($request->category).'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads'), $imageName);
+            $category->image='uploads/'.$imageName;
+        }
         $category->save();
         toastr()->success('Kategori başarıyla oluşturuldu');
         return redirect()->back();

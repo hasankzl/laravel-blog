@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Categories extends Migration
+class Addresses extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class Categories extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            $table->string('slug');
-            $table->integer('status')->default(1);
+            $table->string('fullAddress');
+            $table->unsignedBigInteger('city_id');
             $table->timestamps();
+            $table->foreign('city_id')
+              ->references('id')
+              ->on('cities');
         });
     }
 
@@ -30,6 +31,6 @@ class Categories extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('addresses');
     }
 }

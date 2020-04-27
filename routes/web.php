@@ -31,6 +31,15 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function ()
     Route::get('/kategoriler/status', 'Back\CategoryController@switch')->name('category.switch');
     Route::get('/kategoriler/getData', 'Back\CategoryController@getData')->name('category.get.data');
 
+
+    // Maker Routes
+    Route::get('/yaptiranlar', 'Back\MakerController@index')->name('maker.index');
+    Route::post('/yaptiranlar/create', 'Back\MakerController@create')->name('maker.create');
+    Route::post('/yaptiranlar/update', 'Back\MakerController@update')->name('maker.update');
+    Route::post('/yaptiranlar/delete', 'Back\MakerController@remove')->name('maker.remove');
+    Route::get('/yaptiranlar/getData', 'Back\MakerController@getData')->name('maker.get.data');
+
+
     //Pages Routes
     Route::get('/sayfalar', 'Back\PageController@index')->name('page.index');
     Route::get('/sayfalar/switch', 'Back\PageController@switch')->name('page.switch');

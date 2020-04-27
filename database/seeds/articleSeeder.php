@@ -19,7 +19,10 @@ class articleSeeder extends Seeder
             $title=$faker->sentence(6);
             DB::table("articles")->insert([
             'title'=>$title,
-            'category_id'=>rand(1, 7),
+            'category_id'=>rand(1, 5),
+            'maker_id'=>rand(1, 5),
+            'city_id'=>rand(1, 5),
+            'fullAddress'=>"tam adres",
             'image'=>$faker->imageUrl('800', '400', 'cats', true, 'faker'),
             'content'=>$faker->paragraph(6),
             'slug'=>Str::slug($title),

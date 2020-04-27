@@ -3,7 +3,7 @@
 @section('content')
 @section('bg','https://p0.pxfuel.com/preview/1013/721/141/contact-details-smartphone-business-contact-us-royalty-free-thumbnail.jpg')
 
-<div class=" col-md-8 ">
+<div class=" col-md-12 ">
   @if(session('success'))
   <div class="alert alert-success">
     {{session('success')}}
@@ -24,14 +24,14 @@
     <div class="control-group">
       <div class="form-group  controls">
         <label>Ad Soyad</label>
-        <input type="text" class="form-control" value="{{old('name')}}" placeholder="Ad Soyadınız"name="name" required data-validation-required-message="Please enter your name.">
+        <input type="text" class="form-control" value="{{old('name')}}" placeholder="Ad Soyadınız"name="name" required >
         <p class="help-block text-danger"></p>
       </div>
     </div>
     <div class="control-group">
       <div class="form-group  controls">
         <label>Email</label>
-        <input type="email" class="form-control" placeholder="Email adresiniz" value="{{old('email')}}" name="email" required data-validation-required-message="Please enter your email address.">
+        <input type="email" class="form-control" placeholder="Email adresiniz" value="{{old('email')}}" name="email" required >
         <p class="help-block text-danger"></p>
       </div>
     </div>
@@ -62,12 +62,5 @@
     </div>
   </form>
 </div>
-<div class="col-md-4">
-<div class="card-group">
-  <div class="card card-default">
-    <div class="card-body">Panel Content</div>
-    Adres: mhasan.kzl@gmail.com
-  </div>
-</div>
-</div>
+
 @endsection

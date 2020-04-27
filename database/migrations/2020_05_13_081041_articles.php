@@ -17,6 +17,9 @@ class Articles extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('maker_id');
+            $table->unsignedBigInteger('city_id');
+            $table->string('fullAddress');
             $table->string('image');
             $table->longText('content');
             $table->integer('hit')->default(0);
@@ -28,6 +31,14 @@ class Articles extends Migration
             $table->foreign('category_id')
               ->references('id')
               ->on('categories');
+
+            $table->foreign('maker_id')
+            ->references('id')
+            ->on('makers');
+
+            $table->foreign('city_id')
+            ->references('id')
+            ->on('cities');
         });
     }
 

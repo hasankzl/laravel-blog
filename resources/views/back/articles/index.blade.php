@@ -18,6 +18,7 @@
             <th>Makale Başlığı</th>
             <th>Kategori</th>
             <th>Hit</th>
+              <th>Yapan</th>
             <th>Oluşturulma Tarihi</th>
           <th>Durum</th>
             <th>İşlemler   </th>
@@ -33,6 +34,7 @@
             <td>{{$article->title}}</td>
             <td>{{$article->getCategory->name}}</td>
             <td>{{$article->hit}}</td>
+            <td>{{$article->getMaker->name}}</td>
             <td>{{$article->created_at->diffForHumans()}}</td>
             <td><input class="switch" type="checkbox" article-id="{{$article->id}}" @if($article->status==1) checked @endif data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Aktif" data-off="Pasif"></td>
             <td>
