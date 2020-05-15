@@ -17,9 +17,13 @@
             <th>Fotoğraf</th>
             <th>Makale Başlığı</th>
             <th>Kategori</th>
-            <th>Hit</th>
-              <th>Yapan</th>
+            <th>Yaptıran</th>
+            <th>Padişah</th>
+            <th>Şeyhülislam</th>
+            <th>Mimar</th>
+            <th>Yüzyıl</th>
             <th>Oluşturulma Tarihi</th>
+            <th>Hit</th>
           <th>Durum</th>
             <th>İşlemler   </th>
           </tr>
@@ -29,13 +33,17 @@
           @foreach($articles as $article)
           <tr>
             <td>
-              <img src="{{asset($article->image)}}" width="200" />
+              <img src="{{asset($article->image)}}" width="100" />
             </td>
             <td>{{$article->title}}</td>
             <td>{{$article->getCategory->name}}</td>
-            <td>{{$article->hit}}</td>
             <td>{{$article->getMaker->name}}</td>
+            <td>{{$article->getPadisah->name}}</td>
+            <td>{{$article->getSeyhulislam->name}}</td>
+            <td>{{$article->getArchitect->name}}</td>
+            <td>{{$article->getCentury->name}}</td>
             <td>{{$article->created_at->diffForHumans()}}</td>
+            <td>{{$article->hit}}</td>
             <td><input class="switch" type="checkbox" article-id="{{$article->id}}" @if($article->status==1) checked @endif data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Aktif" data-off="Pasif"></td>
             <td>
               <a target="_blank" href="{{route('single',[$article->getCategory->slug,$article->slug])}}" title="Görüntüle" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
@@ -60,7 +68,7 @@
     $('.switch').change(function() {
       var id= $(this)[0].getAttribute('article-id');
       var statu=$(this).prop('checked');
-$.get("{{route('admin.article.switch',)}}",{id:id,statu:statu});
+$.get("{{route('admin.article.switch')}}",{id:id,statu:statu});
     })
   })
 </script>

@@ -65,6 +65,9 @@
   </div>
     </div>
 </div>
+
+
+
 <!-- Delete Modal-->
 <div class="modal fade" id="deleteModal" role="dialog">
   <div class="modal-dialog">
@@ -138,8 +141,6 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script>
   $(function() {
-
-
     $('.delete-click').click(function(){
       var id= $(this)[0].getAttribute('category-id');
       var name= $(this)[0].getAttribute('category-name');
@@ -175,7 +176,7 @@
     $('.switch').change(function() {
       var id= $(this)[0].getAttribute('category-id');
       var statu=$(this).prop('checked');
-$.get("{{route('admin.category.switch',)}}",{id:id,statu:statu});
+$.get("{{route('admin.category.switch')}}",{id:id,statu:statu});
     })
   })
 </script>

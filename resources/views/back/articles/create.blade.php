@@ -42,10 +42,76 @@ seçim yapınız
 @endforeach
     </select>
   </div>
+
+  <div class="form-group">
+    <label>Padisah</label>
+    <select class="form-control" name="padisah" required>
+<option value="">
+Padisah Seçiniz
+</option>
+@foreach($padisahs as $padisah)
+<option value="{{$padisah->id}}">{{$padisah->name}}</option>
+@endforeach
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Şeyhülislam</label>
+    <select class="form-control" name="seyhulislam" required>
+<option value="">
+şeyhülislam seçiniz
+</option>
+@foreach($seyhulislams as $seyhulislam)
+<option value="{{$seyhulislam->id}}">{{$seyhulislam->name}}</option>
+@endforeach
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Mimar</label>
+    <select class="form-control" name="architect" required>
+<option value="">
+mimar seçiniz
+</option>
+@foreach($architects as $architect)
+<option value="{{$architect->id}}">{{$architect->name}}</option>
+@endforeach
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label>Yüzyıl</label>
+
+    <div class="row">
+      <div class="col-md-8">
+        <select class="form-control" name="century" required>
+    <option value=""> yüzyıl seçiniz
+    </option>
+    @foreach($centuries as $century)
+    <option value="{{$century->id}}">{{$century->name}}</option>
+    @endforeach
+        </select>
+      </div>
+      <div class="col-md-4">
+            <input type="text" name="year" placeholder="yıl veya çeyrek giriniz" class="form-control" required/>
+      </div>
+    </div>
+  </div>
+
   <div class="form-group">
       <label for="">Adres</label>
 <div class="row">
-<div class="col-md-6">
+  <div class="col-md-3">
+    <select class="form-control" name="country" required>
+    <option value="">
+    Ülke seçiniz seçiniz
+    </option>
+    @foreach($countries as $country)
+    <option value="{{$country->id}}">{{$country->name}}</option>
+    @endforeach
+    </select>
+  </div>
+<div class="col-md-3">
   <select class="form-control" name="city" required>
   <option value="">
   sehir seçiniz
@@ -63,6 +129,10 @@ seçim yapınız
   <div class="form-group">
     <label>Makale Fotoğrafı</label>
     <input type="file" name="image" class="form-control" required />
+  </div>
+  <div class="form-group">
+    <label>Galeri Fotoğrafları</label>
+    <input type="file" name="file[]" class="form-control" multiple required />
   </div>
   <div class="form-group">
     <label>Makale Başlığı</label>

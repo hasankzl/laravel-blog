@@ -73,7 +73,7 @@ $.get("{{route('admin.page.orders')}}?"+siralama,function(data,status){
     $('.switch').change(function() {
       var id= $(this)[0].getAttribute('page-id');
       var statu=$(this).prop('checked');
-$.get("{{route('admin.page.switch',)}}",{id:id,statu:statu});
+$.get("{{route('admin.page.switch')}}",{id:id,statu:statu});
     })
   })
 </script>

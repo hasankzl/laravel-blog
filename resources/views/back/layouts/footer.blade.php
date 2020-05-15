@@ -68,8 +68,8 @@
 <script src="{{asset('back/')}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{asset('back/')}}/js/demo/datatables-demo.js"></script>
 @yield('js')
+<script src="{{asset('back/')}}/js/demo/datatables-demo.js"></script>
 @toastr_js
 @toastr_render
 </body>

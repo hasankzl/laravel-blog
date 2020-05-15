@@ -45,10 +45,77 @@ seçim yapınız
 @endforeach
     </select>
   </div>
+
+
+    <div class="form-group">
+      <label>Padisah</label>
+      <select class="form-control" name="padisah" required>
+  <option value="">
+  Padisah Seçiniz
+  </option>
+  @foreach($padisahs as $padisah)
+  <option  @if($padisah->id ==$article->padisah_id) selected  @endif value="{{$padisah->id}}">{{$padisah->name}}</option>
+  @endforeach
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Şeyhülislam</label>
+      <select class="form-control" name="seyhulislam" required>
+  <option value="">
+  şeyhülislam seçiniz
+  </option>
+  @foreach($seyhulislams as $seyhulislam)
+  <option  @if($seyhulislam->id ==$article->seyhulislam_id) selected  @endif value="{{$seyhulislam->id}}">{{$seyhulislam->name}}</option>
+  @endforeach
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Mimar</label>
+      <select class="form-control" name="architect" required>
+  <option value="">
+  mimar seçiniz
+  </option>
+  @foreach($architects as $architect)
+  <option  @if($architect->id ==$article->architect_id) selected  @endif value="{{$architect->id}}">{{$architect->name}}</option>
+  @endforeach
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <label>Yüzyıl</label>
+
+      <div class="row">
+        <div class="col-md-8">
+          <select class="form-control" name="century" required>
+      <option value=""> yüzyıl seçiniz
+      </option>
+      @foreach($centuries as $century)
+      <option  @if($century->id ==$article->century_id) selected  @endif value="{{$century->id}}">{{$century->name}}</option>
+      @endforeach
+          </select>
+        </div>
+        <div class="col-md-4">
+              <input type="text" name="year" value="{{$article->year}}" placeholder="yıl veya çeyrek giriniz" class="form-control" required/>
+        </div>
+      </div>
+    </div>
+
   <div class="form-group">
     <label>Adres</label>
     <div class="row">
-<div class="col-md-6">
+      <div class="col-md-3">
+        <select class="form-control" name="country" required>
+        <option value="">
+        Ülke seçiniz seçiniz
+        </option>
+        @foreach($countries as $country)
+        <option @if($country->id ==$article->country_id) selected  @endif value="{{$country->id}}">{{$country->name}}</option>
+        @endforeach
+        </select>
+      </div>
+<div class="col-md-3">
   <select class="form-control" name="city"
   required>
 <option value="">
@@ -68,6 +135,10 @@ seçim yapınız
     <label>Makale Fotoğrafı</label><br/>
     <img src="{{asset($article->image)}}"  width="300" class="img-thumbnail rounded mb-2"/>
     <input type="file" name="image" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Galeri Fotoğrafları</label>
+    <input type="file" name="file[]" class="form-control" multiple />
   </div>
   <div class="form-group">
     <label>Makale Başlığı</label>

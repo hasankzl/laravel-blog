@@ -10,7 +10,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.dashboard')}}">
 
-        <div class="sidebar-brand-text ">Blog Sitesi Admin </div>
+        <div class="sidebar-brand-text ">Devletimiz Admin </div>
       </a>
 
       <!-- Divider -->
@@ -61,6 +61,46 @@
         </a>
 
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="padisahlar") text-white  @endif" href="{{route('admin.padisah.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="padisahlar") text-white  @endif"></i>
+          <span>Padişahlar</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="seyhulislamlar") text-white  @endif" href="{{route('admin.seyhulislam.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="seyhulislamlar") text-white  @endif"></i>
+          <span>Şeyhülislamlar</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="mimarlar") text-white  @endif" href="{{route('admin.architect.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="mimarlar") text-white  @endif"></i>
+          <span>Mimarlar</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="ulkeler") text-white  @endif" href="{{route('admin.country.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="mimarlar") text-white  @endif"></i>
+          <span>Ülkeler</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="sehirler") text-white  @endif" href="{{route('admin.city.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="mimarlar") text-white  @endif"></i>
+          <span>Şehirler</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="yuzyillar") text-white  @endif" href="{{route('admin.century.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="yuzyillar") text-white  @endif"></i>
+          <span>Yüzyıllar</span>
+        </a>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link  @if(Request::segment(2)=="sayfalar") in @else collapsed @endif" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
           <i class="fas fa-fw fa-folder"></i>

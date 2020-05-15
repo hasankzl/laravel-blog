@@ -10,73 +10,115 @@
   <title>@yield('title','Devletimiz') - {{$config->title}}</title>
   <link rel="shortcut icon" type="image/png" href="{{asset($config->favicon)}}"/>
   <!-- Bootstrap core CSS -->
-  <link href="{{asset('front/')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+  <link href="{{asset('front/')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{asset('front/')}}/css/style.css" rel="stylesheet"/>
   <!-- Custom fonts for this template -->
-  <link href="{{asset('front/')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href="{{asset('front/')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 
   <!-- Custom styles for this template -->
-  <link href="{{asset('front/')}}/css/clean-blog.min.css" rel="stylesheet">
+  <link href="{{asset('front/')}}/css/clean-blog.min.css" rel="stylesheet" />
 
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="{{route('homepage')}}">
+      @if($config->logo!=null)
+      <img src="{{asset($config->logo)}}" width="100px"/>
+      @else
+      {{$config->title}}
+      @endif
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="{{route('homepage')}}">
-        @if($config->logo!=null)
-        <img src="{{asset($config->logo)}}" width="100px"/>
-        @else
-        {{$config->title}}
-        @endif
-      </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('homepage')}}">Anasayfa</a>
-          </li>
-          @foreach($categories as $category)
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('category',$category->slug)}}">{{$category->name}}</a>
-          </li>
-          @endforeach
-          @foreach($pages as $page)
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('page',$page->slug)}}">{{$page->title}}</a>
-          </li>
-          @endforeach
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('contact')}}">İletişim</a>
-          </li>
-        </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Kategoriler
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="row">
+
+            @foreach($categories as $category)
+              <div class="col-md-6">
+                <a class="dropdown-item" href="/arama/?kategori={{$category->slug}}">{{$category->name}}</a>
+              </div>
+            @endforeach
+          </div>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Padisahlar
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach($padisahs as $link)
+              <a class="dropdown-item"href="/arama/?padisah={{$link->slug}}">{{$link->name}}</a>
+            @endforeach
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Mimarlar
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach($architects as $link)
+              <a class="dropdown-item"href="/arama/?mimar={{$link->slug}}">{{$link->name}}</a>
+            @endforeach
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Yüzyıllar
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach($centuries as $link)
+              <a class="dropdown-item"href="/arama/?yuzyil={{$link->slug}}">{{$link->name}}</a>
+            @endforeach
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Şehirler
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach($cities as $link)
+              <a class="dropdown-item"href="/arama/?sehir={{$link->slug}}">{{$link->name}}</a>
+            @endforeach
+          </div>
+        </li>
+        @foreach($pages as $page)
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('page',$page->slug)}}">{{$page->title}}</a>
+        </li>
+                @endforeach
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('contact')}}">İletişim</a>
+        </li>
+      </ul>
+      <form class="" method="get" action="/arama/">
+        <div class="input-group">
+      <input type="text" class="form-control" placeholder="isime göre arama" name="ad">
+      <div class="input-group-btn">
+        <button class="btn btn-default" type="submit">
+        <i class="fas fa-search"></i>
+        </button>
       </div>
+    </div>
+    </div>
+      </form>
     </div>
   </nav>
-
   <!-- Page Header -->
-  <header
-
-  class="masthead" style="background-image: url('@yield('bg',asset('front/img/home-bg.jpg'))')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 mx-auto">
-          <div class="site-heading">
-            <h2>@yield('title')</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
 
   <!-- Main Content -->
-  <div class="container">
+  <div class="m-4">
     <div class="row">

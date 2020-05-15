@@ -6,8 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Architect;
+use App\Models\Padisah;
+use App\Models\Seyhulislam;
+use App\Models\Century;
 use App\Models\Maker;
 use App\Models\City;
+use App\Models\Image;
+use App\Models\Country;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -35,7 +41,12 @@ class ArticleController extends Controller
         $categories=Category::All();
         $makers=Maker::All();
         $cities=City::All();
-        return view('back.articles.create', compact('categories', 'makers', 'cities'));
+        $padisahs=Padisah::All();
+        $seyhulislams=Seyhulislam::All();
+        $centuries=Century::All();
+        $countries=Country::All();
+        $architects=Architect::All();
+        return view('back.articles.create', compact('categories', 'makers', 'cities', 'padisahs', 'seyhulislams', 'centuries', 'architects', 'countries'));
     }
 
     /**
@@ -50,14 +61,27 @@ class ArticleController extends Controller
           'title'=>'min:3',
           'image'=>'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
+        $checkArticle= Article::where('title', $request->title)->get();
+
+        if (count($checkArticle)>=1) {
+            toastr()->warning('Bu isimde makale bulundu', 'hata');
+            return redirect()->back();
+        }
         $article = new Article();
         $article->title=$request->title;
         $article->category_id=$request->category;
+        $article->padisah_id=$request->padisah;
+        $article->seyhulislam_id=$request->seyhulislam;
+        $article->architect_id=$request->architect;
+        $article->century_id=$request->century;
+        $article->country_id=$request->country;
+        $article->year=$request->year;
         $article->content=$request->content;
         $article->maker_id=$request->maker;
         $article->city_id=$request->city;
         $article->fullAddress=$request->fullAddress;
         $article->slug=Str::slug($request->title);
+
 
 
         if ($request->hasFile('image')) {
@@ -67,6 +91,20 @@ class ArticleController extends Controller
         }
 
         $article->save();
+
+        if ($request->hasFile('file')) {
+            $lastArticle = Article::where('slug', $article->slug)->get();
+
+            foreach ($request->file as $key=> $file) {
+                $image = new Image();
+                $imageName=Str::slug($request->title).$key.'.'.$file->getClientOriginalExtension();
+                $image->article_id=$lastArticle[0]->id;
+                $image->size=$file->getSize();
+                $file->move(public_path('uploads'), $imageName);
+                $image->name = 'uploads/'.$imageName;
+                $image->save();
+            }
+        }
         toastr()->success('Makale Başarıyla Oluşturuldu', 'Başarılı');
         return redirect()->route('admin.makaleler.index');
     }
@@ -100,8 +138,13 @@ class ArticleController extends Controller
         $article=Article::findOrFail($id);
         $categories=Category::All();
         $makers=Maker::All();
+        $padisahs=Padisah::All();
+        $seyhulislams=Seyhulislam::All();
+        $centuries=Century::All();
+        $countries=Country::All();
+        $architects=Architect::All();
         $cities=City::All();
-        return view('back.articles.update', compact('categories', 'makers', 'cities', 'article'));
+        return view('back.articles.update', compact('categories', 'makers', 'cities', 'article', 'padisahs', 'seyhulislams', 'centuries', 'architects', 'countries'));
     }
 
     /**
@@ -117,11 +160,25 @@ class ArticleController extends Controller
         'title'=>'min:3',
         'image'=>'image|mimes:jpeg,png,jpg|max:2048'
       ]);
+
         $article = Article::findOrFail($id);
+        if ($article->title != $request->title) {
+            $checkArticle= Article::where('title', $request->title)->get();
+            if (count($checkArticle)>=1) {
+                toastr()->warning('Bu isimde makale bulundu', 'hata');
+                return redirect()->back();
+            }
+        }
         $article->title=$request->title;
         $article->category_id=$request->category;
+        $article->padisah_id=$request->padisah;
+        $article->seyhulislam_id=$request->seyhulislam;
+        $article->architect_id=$request->architect;
+        $article->century_id=$request->century;
+        $article->year=$request->year;
         $article->content=$request->content;
         $article->maker_id=$request->maker;
+        $article->country_id=$request->country;
         $article->city_id=$request->city;
         $article->fullAddress=$request->fullAddress;
         $article->slug=Str::slug($request->title);
@@ -134,6 +191,23 @@ class ArticleController extends Controller
         }
 
         $article->save();
+
+        if ($request->hasFile('file')) {
+            $lastArticle = Article::where('slug', $article->slug)->first();
+            foreach ($lastArticle->getImages as $img) {
+                file::delete(public_path()."\\".$img->name);
+                Image::findorFail($img->id)->delete();
+            }
+            foreach ($request->file as $key=> $file) {
+                $image = new Image();
+                $imageName=Str::slug($request->title).$key.'.'.$file->getClientOriginalExtension();
+                $image->article_id=$lastArticle->id;
+                $image->size=$file->getSize();
+                $file->move(public_path('uploads'), $imageName);
+                $image->name = 'uploads/'.$imageName;
+                $image->save();
+            }
+        }
         toastr()->success('Makale Başarıyla Güncellendi', 'Başarılı');
         return redirect()->route('admin.makaleler.index');
     }
@@ -171,6 +245,10 @@ class ArticleController extends Controller
         $article =  Article::onlyTrashed()->findOrFail($id);
         if (File::exists($article->image)) {
             File::delete(public_path($article->image));
+        }
+        foreach ($article->getImages as $img) {
+            file::delete(public_path()."\\".$img->name);
+            Image::findorFail($img->id)->delete();
         }
         $article->forceDelete();
 
