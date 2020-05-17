@@ -14,7 +14,6 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Fotoğraf</th>
             <th>Makale Başlığı</th>
             <th>Kategori</th>
             <th>Yaptıran</th>
@@ -32,9 +31,6 @@
         <tbody>
           @foreach($articles as $article)
           <tr>
-            <td>
-              <img src="{{asset($article->image)}}" width="100" />
-            </td>
             <td>{{$article->title}}</td>
             <td>{{$article->getCategory->name}}</td>
             <td>{{$article->getMaker->name}}</td>

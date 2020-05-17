@@ -14,11 +14,19 @@ use App\Models\Page;
 use App\Models\Contact;
 use App\Models\Config;
 use App\Models\Maker;
+use App\Models\Country;
 use App\Models\City;
 use App\Models\Padisah;
 use App\Models\Seyhulislam;
 use App\Models\Architect;
 use App\Models\Century;
+use App\Models\Semt;
+use App\Models\Street;
+use App\Models\Neighborhood;
+use App\Models\Avenue;
+use App\Models\District;
+use App\Models\Village;
+use App\Models\Status;
 use PDF;
 
 class HomePage extends Controller
@@ -36,6 +44,15 @@ class HomePage extends Controller
         view()->share('seyhulislams', Seyhulislam::orderBy('name', 'ASC')->get());
         view()->share('architects', Architect::orderBy('name', 'ASC')->get());
         view()->share('centuries', Century::orderBy('name', 'ASC')->get());
+        view()->share('countries', Country::orderBy('name', 'ASC')->get());
+        view()->share('avenues', Avenue::orderBy('name', 'ASC')->get());
+        view()->share('streets', Street::orderBy('name', 'ASC')->get());
+        view()->share('semts', Semt::orderBy('name', 'ASC')->get());
+        view()->share('neighborhoods', NeighborHood::orderBy('name', 'ASC')->get());
+        view()->share('districts', District::orderBy('name', 'ASC')->get());
+        view()->share('villages', Village::orderBy('name', 'ASC')->get());
+        view()->share('statuses', Status::orderBy('name', 'ASC')->get());
+
         view()->share('config', Config::find(1));
     }
     public function index()
@@ -74,7 +91,6 @@ class HomePage extends Controller
             $category = Category::whereSlug($request->kategori)->first() ?? abort(403, 'Böyle bir kategori bulunamadı');
             $category->fullSlug='kategori='.$category->slug;
             $data['selected']['selectedCategory']=$category;
-
             $whereArray=Arr::add($whereArray, 'category_id', $category->id);
         }
         if ($request->yaptiran) {
@@ -111,7 +127,56 @@ class HomePage extends Controller
             $city = City::whereSlug($request->sehir)->first() ?? abort(403, 'Böyle bir sehir bulunamadı');
             $city->fullSlug='sehir='.$city->slug;
             $data['selected']['selectedCity']=$city;
+            $data['districts']=District::where('city_id', $city->id)->get();
+            $data['semts']=Semt::where('city_id', $city->id)->get();
             $whereArray=Arr::add($whereArray, 'city_id', $city->id);
+        }
+        if ($request->ulke) {
+            $country= Country::whereSlug($request->ulke)->first() ?? abort(403, 'Böyle bir ülke bulunamadı');
+            $country->fullSlug='ulke='.$country->slug;
+            $data['selected']['selectedCountry']=$country;
+            $data['cities']=City::where('country_id', $country->id)->get();
+            $whereArray=Arr::add($whereArray, 'country_id', $country->id);
+        }
+        if ($request->ilce) {
+            $district= District::whereSlug($request->ilce)->first() ?? abort(403, 'Böyle bir ilçe bulunamadı');
+            $district->fullSlug='ilce='.$district->slug;
+            $data['selected']['selectedDistrict']=$district;
+            $data['neighborhoods']=NeighborHood::where('district_id', $district->id)->get();
+            $data['villages']=Village::where('district_id', $district->id)->get();
+            $whereArray=Arr::add($whereArray, 'district_id', $district->id);
+        }
+        if ($request->semt) {
+            $semt= Semt::whereSlug($request->semt)->first() ?? abort(403, 'Böyle bir semt bulunamadı');
+            $semt->fullSlug='semt='.$semt->slug;
+            $data['selected']['selectedSemt']=$semt;
+            $whereArray=Arr::add($whereArray, 'semt_id', $semt->id);
+        }
+        if ($request->mahalle) {
+            $neighborhood= Neighborhood::whereSlug($request->mahalle)->first() ?? abort(403, 'Böyle bir mahalle bulunamadı');
+            $neighborhood->fullSlug='mahalle='.$neighborhood->slug;
+            $data['selected']['selectedNeighborhood']=$neighborhood;
+            $data['avenues']=Avenue::where('neighborhood_id', $neighborhood->id)->get();
+            $whereArray=Arr::add($whereArray, 'neighborhood_id', $neighborhood->id);
+        }
+        if ($request->koy) {
+            $village= Village::whereSlug($request->koy)->first() ?? abort(403, 'Böyle bir köy bulunamadı');
+            $village->fullSlug='koy='.$village->slug;
+            $data['selected']['selectedVillage']=$village;
+            $whereArray=Arr::add($whereArray, 'village_id', $village->id);
+        }
+        if ($request->cadde) {
+            $avenue= Avenue::whereSlug($request->cadde)->first() ?? abort(403, 'Böyle bir cadde bulunamadı');
+            $avenue->fullSlug='cadde='.$avenue->slug;
+            $data['selected']['selectedAvenue']=$avenue;
+            $data['streets']=Street::where('avenue_id', $avenue->id)->get();
+            $whereArray=Arr::add($whereArray, 'avenue_id', $avenue->id);
+        }
+        if ($request->sokak) {
+            $street= Street::whereSlug($request->sokak)->first() ?? abort(403, 'Böyle bir sokak bulunamadı');
+            $street->fullSlug='sokak='.$street->slug;
+            $data['selected']['selectedStreet']=$street;
+            $whereArray=Arr::add($whereArray, 'street_id', $street->id);
         }
         $data['articles'] = Article::where($whereArray)->whereStatus(1)->orderBy('created_at', 'DESC')->paginate(8);
         return view('front.search', $data);
@@ -164,7 +229,7 @@ class HomePage extends Controller
     {
         $article = Article::where('slug', $slug)->first();
 
-        $pdf = PDF::loadView('front\print_pdf', $article);
+        $pdf = PDF::loadView('front.print_pdf', $article);
         return $pdf->download($slug.'.pdf');
     }
 }

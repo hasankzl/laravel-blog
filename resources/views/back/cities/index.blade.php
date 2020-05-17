@@ -1,5 +1,5 @@
 @extends('back.layouts.master')
-@section('title','Ülkeler')
+@section('title','Şehirler')
 @section('content')
 <div class="row">
 <div class="col-md-4">
@@ -11,6 +11,14 @@
   <div class="card-body">
 <form method="post" action="{{route('admin.city.create')}}">
 @csrf
+<div class="form-group">
+  <select class="form-control" name="country" required>
+    <option value="">ülke seçiniz</option>
+    @foreach($countries as $country)
+    <option value="{{$country->id}}">{{$country->name}}</option>
+    @endforeach
+  </select>
+</div>
 <div class="form-group">
 <label> Adı</label>
 <input type="text" class="form-control" name="city" required />
@@ -32,6 +40,7 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
+            <th>Şehir</th>
             <th>Adı</th>
             <th>Makale Sayısı</th>
             <th>İşlemler</th>
@@ -41,7 +50,8 @@
         <tbody>
           @foreach($cities as $city)
           <tr>
-            <td>{{$city->name}}</td>
+            <td>{{$city->getCountry->name}}</td>
+              <td>{{$city->name}}</td>
             <td>{{$city->articleCount()}}</td>
             <td>
                 <a id="edit-click"  city-id="{{$city->id}}" class="edit-click btn btn-sm btn-primary text-white" title=" düzenle"><i class="fa fa-edit"></i></a>
@@ -95,6 +105,15 @@
       <div class="modal-body">
         <form method="post" action="{{route('admin.city.update')}}">
           @csrf
+          <div class="form-group">
+            <label for="country">Ülke</label>
+            <select id="country_id" class="form-control" name="country" required>
+              <option value="">ülke seçiniz</option>
+              @foreach($countries as $country)
+              <option value="{{$country->id}}">{{$country->name}}</option>
+              @endforeach
+            </select>
+          </div>
 <div class="form-group">
 <label>Kategori Adı</label>
 <input id="city" type="text" class="form-control" name="city" />
@@ -151,6 +170,7 @@
           $('#city').val(data.name);
           $('#slug').val(data.slug);
           $('#city_id').val(data.id);
+          $('#country_id').val(data.country_id);
           $('#editModal').modal();
         }
       });

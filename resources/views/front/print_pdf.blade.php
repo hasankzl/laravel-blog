@@ -3,7 +3,7 @@
   <head>
 <style>
 *{
-    font-family:"DeJaVu Sans Mono",monospace;
+    font-family:"DeJaVu Sans Mono",monospace !important;
     font-size: 15px;
 }
 .title {
@@ -11,7 +11,7 @@
   margin: 15px;
 }
 </style>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{$title}}</title>
     <br/>
     <br/>

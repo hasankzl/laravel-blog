@@ -13,7 +13,7 @@ class makerSeeder extends Seeder
      */
     public function run()
     {
-        $names=['Abdulhamit','Yavuz Sultan Selim','Fatih','Osman Bey'];
+        $names=['belirtilmedi','Yavuz Sultan Selim','Fatih','Osman Bey'];
         foreach ($names as $name) {
             DB::table('makers')->insert([
         'name'=>$name,

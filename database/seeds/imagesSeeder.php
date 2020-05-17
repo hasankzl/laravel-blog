@@ -12,7 +12,7 @@ class imagesSeeder extends Seeder
      */
     public function run()
     {
-        $names=['Osman Bey','1.Mehmed','Yavuz Sultan Selim','Kanuni'];
+        $names=['belirtilmedi','1.Mehmed','Yavuz Sultan Selim','Kanuni'];
         foreach ($names as $name) {
             DB::table('images')->insert([
             'name'=>$name,

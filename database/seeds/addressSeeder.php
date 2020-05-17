@@ -13,13 +13,13 @@ class addressSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i <5 ; $i++) {
-            DB::table('addresses')->insert([
-       'city_id'=>rand(1, 5),
-       'fullAddress'=>"Tam adresi",
-       'created_at'=>now(),
-       'updated_at'=>now()
+        /*  for ($i=0; $i <5 ; $i++) {
+              DB::table('addresses')->insert([
+         'city_id'=>rand(1, 5),
+         'fullAddress'=>"Tam adresi",
+         'created_at'=>now(),
+         'updated_at'=>now()
      ]);
-        }
+          }*/
     }
 }

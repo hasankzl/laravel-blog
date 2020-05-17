@@ -13,7 +13,7 @@ class centurySeeder extends Seeder
      */
     public function run()
     {
-        $names=['1 YY','2 YY','3 YY','4 YY','5 YY','6 YY'];
+        $names=['belirtilmedi','2 YY','3 YY','4 YY','5 YY','6 YY'];
         foreach ($names as $name) {
             DB::table('centuries')->insert([
   'name'=>$name,

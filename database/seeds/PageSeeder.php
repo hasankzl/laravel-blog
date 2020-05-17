@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 class PageSeeder extends Seeder
 {
     /**
@@ -12,11 +13,11 @@ class PageSeeder extends Seeder
      */
     public function run()
     {
-      $count=0;
-      $pages=['Hakkımızda','Kariyer','Vizyonumuz','Misyonumuz'];
-      foreach ($pages as $page) {
-        $count++;
-        DB::table('pages')->insert([
+        $count=0;
+        $pages=['Hakkımızda'];
+        foreach ($pages as $page) {
+            $count++;
+            DB::table('pages')->insert([
   'title'=>$page,
   'slug'=>Str::slug($page),
   'created_at'=>now(),
@@ -29,8 +30,7 @@ class PageSeeder extends Seeder
   'updated_at'=>now(),
 
 ]);
-        // code...
-      }
-
+            // code...
+        }
     }
 }

@@ -3,10 +3,10 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
   <title>@yield('title','Devletimiz') - {{$config->title}}</title>
   <link rel="shortcut icon" type="image/png" href="{{asset($config->favicon)}}"/>
   <!-- Bootstrap core CSS -->
@@ -19,7 +19,7 @@
 
   <!-- Custom styles for this template -->
   <link href="{{asset('front/')}}/css/clean-blog.min.css" rel="stylesheet" />
-
+  @yield('css')
 </head>
 
 <body>
@@ -32,7 +32,7 @@
       @endif
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <i class="fas fa-bars"></i>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -43,14 +43,16 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Kategoriler
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <div class="row">
+          <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
 
-            @foreach($categories as $category)
-              <div class="col-md-6">
-                <a class="dropdown-item" href="/arama/?kategori={{$category->slug}}">{{$category->name}}</a>
+              <div class="row drop-link" >
+              @foreach($categories as $category)
+              <div class="col-md-4 text-center " >
+                <a class="dropdown-item drop-link-item" href="/arama/?kategori={{$category->slug}}">{{$category->name}}</a>
+
               </div>
-            @endforeach
+              @endforeach
+
           </div>
 
           </div>
@@ -60,9 +62,13 @@
             Padisahlar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="row drop-link" >
             @foreach($padisahs as $link)
-              <a class="dropdown-item"href="/arama/?padisah={{$link->slug}}">{{$link->name}}</a>
+            <div class="col-md-4 text-center">
+              <a class="dropdown-item drop-link-item" href="/arama/?padisah={{$link->slug}}">{{$link->name}}</a>
+            </div>
             @endforeach
+          </div>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -70,9 +76,15 @@
            Mimarlar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            @foreach($architects as $link)
-              <a class="dropdown-item"href="/arama/?mimar={{$link->slug}}">{{$link->name}}</a>
-            @endforeach
+            <div class="row drop-link">
+              @foreach($architects as $link)
+
+              <div class="col-md-4 text-center">
+                <a class="dropdown-item drop-link-item"href="/arama/?mimar={{$link->slug}}">{{$link->name}}</a>
+              </div>
+              @endforeach
+            </div>
+
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -80,9 +92,14 @@
             Yüzyıllar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            @foreach($centuries as $link)
-              <a class="dropdown-item"href="/arama/?yuzyil={{$link->slug}}">{{$link->name}}</a>
-            @endforeach
+            <div class="row drop-link">
+              @foreach($centuries as $link)
+              <div class="col-md-4 text-center">
+                <a class="dropdown-item drop-link-item" href="/arama/?yuzyil={{$link->slug}}">{{$link->name}}</a>
+              </div>
+              @endforeach
+            </div>
+
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -90,9 +107,15 @@
             Şehirler
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            @foreach($cities as $link)
-              <a class="dropdown-item"href="/arama/?sehir={{$link->slug}}">{{$link->name}}</a>
-            @endforeach
+            <div class="row drop-link">
+              @foreach($cities as $link)
+              <div class="col-md-4 text-center">
+                <a class="dropdown-item drop-link-item"href="/arama/?sehir={{$link->slug}}">{{$link->name}}</a>
+
+              </div>
+              @endforeach
+            </div>
+
           </div>
         </li>
         @foreach($pages as $page)
@@ -113,12 +136,11 @@
         </button>
       </div>
     </div>
-    </div>
-      </form>
+        </form>
     </div>
   </nav>
   <!-- Page Header -->
 
   <!-- Main Content -->
   <div class="m-4">
-    <div class="row">
+    <div class="">

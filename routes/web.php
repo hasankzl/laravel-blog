@@ -62,6 +62,14 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function ()
     Route::post('/mimarlar/delete', 'Back\ArchitectController@remove')->name('architect.remove');
     Route::get('/mimarlar/getData', 'Back\ArchitectController@getData')->name('architect.get.data');
 
+    // Architect Routes
+    Route::get('/durum', 'Back\StatusController@index')->name('status.index');
+    Route::post('/durum/create', 'Back\StatusController@create')->name('status.create');
+    Route::post('/durum/update', 'Back\StatusController@update')->name('status.update');
+    Route::post('/durum/delete', 'Back\StatusController@remove')->name('status.remove');
+    Route::get('/durum/getData', 'Back\StatusController@getData')->name('status.get.data');
+
+
     // Century Routes
     Route::get('/yuzyillar', 'Back\CenturyController@index')->name('century.index');
     Route::post('/yuzyillar/create', 'Back\CenturyController@create')->name('century.create');
@@ -83,6 +91,49 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function ()
     Route::post('/ulkeler/delete', 'Back\CountryController@remove')->name('country.remove');
     Route::get('/ulkeler/getData', 'Back\CountryController@getData')->name('country.get.data');
 
+    // Semt Routes
+    Route::get('/semt', 'Back\SemtController@index')->name('semt.index');
+    Route::post('/semt/create', 'Back\SemtController@create')->name('semt.create');
+    Route::post('/semt/update', 'Back\SemtController@update')->name('semt.update');
+    Route::post('/semt/delete', 'Back\SemtController@remove')->name('semt.remove');
+    Route::get('/semt/getData', 'Back\SemtController@getData')->name('semt.get.data');
+
+    // NeighborHood Routes
+    Route::get('/mahalle', 'Back\NeighborhoodController@index')->name('neighborhood.index');
+    Route::post('/mahalle/create', 'Back\NeighborhoodController@create')->name('neighborhood.create');
+    Route::post('/mahalle/update', 'Back\NeighborhoodController@update')->name('neighborhood.update');
+    Route::post('/mahalle/delete', 'Back\NeighborhoodController@remove')->name('neighborhood.remove');
+    Route::get('/mahalle/getData', 'Back\NeighborhoodController@getData')->name('neighborhood.get.data');
+
+    // Avenue Routes
+    Route::get('/cadde', 'Back\AvenueController@index')->name('avenue.index');
+    Route::post('/cadde/create', 'Back\AvenueController@create')->name('avenue.create');
+    Route::post('/cadde/update', 'Back\AvenueController@update')->name('avenue.update');
+    Route::post('/cadde/delete', 'Back\AvenueController@remove')->name('avenue.remove');
+    Route::get('/cadde/getData', 'Back\AvenueController@getData')->name('avenue.get.data');
+
+    // Street Routes
+    Route::get('/sokak', 'Back\StreetController@index')->name('street.index');
+    Route::post('/sokak/create', 'Back\StreetController@create')->name('street.create');
+    Route::post('/sokak/update', 'Back\StreetController@update')->name('street.update');
+    Route::post('/sokak/delete', 'Back\StreetController@remove')->name('street.remove');
+    Route::get('/sokak/getData', 'Back\StreetController@getData')->name('street.get.data');
+
+
+    // district Routes
+    Route::get('/ilce', 'Back\DistrictController@index')->name('district.index');
+    Route::post('/ilce/create', 'Back\DistrictController@create')->name('district.create');
+    Route::post('/ilce/update', 'Back\DistrictController@update')->name('district.update');
+    Route::post('/ilce/delete', 'Back\DistrictController@remove')->name('district.remove');
+    Route::get('/ilce/getData', 'Back\DistrictController@getData')->name('district.get.data');
+
+    // Village Routes
+    Route::get('/koy', 'Back\VillageController@index')->name('village.index');
+    Route::post('/koy/create', 'Back\VillageController@create')->name('village.create');
+    Route::post('/koy/update', 'Back\VillageController@update')->name('village.update');
+    Route::post('/koy/delete', 'Back\VillageController@remove')->name('village.remove');
+    Route::get('/koy/getData', 'Back\VillageController@getData')->name('village.get.data');
+
     //Pages Routes
     Route::get('/sayfalar', 'Back\PageController@index')->name('page.index');
     Route::get('/sayfalar/switch', 'Back\PageController@switch')->name('page.switch');
@@ -98,17 +149,27 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function ()
     Route::get('/ayarlar', 'Back\ConfigController@index')->name('config.index');
 });
 
+Route::get('/adres/sehirler/{id}', 'AddressController@getCities')->name('address.cities');
+Route::get('/adres/semtler/{id}', 'AddressController@getSemts')->name('address.semts');
+Route::get('/adres/ilceler/{id}', 'AddressController@getDistricts')->name('address.districts');
+Route::get('/adres/mahalleler/{id}', 'AddressController@getNeighborhoods')->name('address.neighborhoods');
+Route::get('/adres/koyler/{id}', 'AddressController@getVillages')->name('address.villages');
+Route::get('/adres/caddeler/{id}', 'AddressController@getAvenues')->name('address.avenues');
+Route::get('/adres/sokaklar/{id}', 'AddressController@getStreets')->name('address.streets');
 
 /*
 front Rootes
 */
 Route::get('/', 'Front\HomePage@index')->name('homepage');
+
 Route::get('/sayfa', 'Front\HomePage@index')->name('homepage');
 Route::get('/iletisim', 'Front\HomePage@contact')->name('contact');
 Route::post('/iletisim', 'Front\HomePage@contactPost')->name('contact.post');
 Route::get('/arama', 'Front\HomePage@search')->name('search');
 Route::get('/{category}/{slug}', 'Front\HomePage@single')->name('single');
 Route::get('/{sayfa}', 'Front\HomePage@page')->name('page');
+
+// Address Routes
 
 
 // PDF Rootes

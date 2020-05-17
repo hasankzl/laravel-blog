@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\City;
 use Illuminate\Support\Str;
 use App\Models\Article;
+use App\Models\Country;
 
 class CityController extends Controller
 {
     public function index()
     {
         $cities=City::all();
-        return view('back.cities.index', compact('cities'));
+        $countries=Country::all();
+        return view('back.cities.index', compact('cities', 'countries'));
     }
 
 
@@ -32,6 +34,7 @@ class CityController extends Controller
         }
         $city = new City;
         $city->name=$request->city;
+        $city->country_id=$request->country;
         $city->slug=Str::slug($request->city);
         $city->save();
         toastr()->success(' başarıyla oluşturuldu');
@@ -48,6 +51,7 @@ class CityController extends Controller
 
         $city = City::findOrFail($request->id);
         $city->name=$request->city;
+        $city->country_id=$request->country;
         if ($city->slug == $request->slug) {
             $city->slug=Str::slug($request->city);
         } else {

@@ -14,6 +14,14 @@ use App\Models\Maker;
 use App\Models\City;
 use App\Models\Image;
 use App\Models\Country;
+use App\Models\Semt;
+use App\Models\Street;
+use App\Models\Neighborhood;
+use App\Models\Avenue;
+use App\Models\District;
+use App\Models\Village;
+use App\Models\Status;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -46,7 +54,17 @@ class ArticleController extends Controller
         $centuries=Century::All();
         $countries=Country::All();
         $architects=Architect::All();
-        return view('back.articles.create', compact('categories', 'makers', 'cities', 'padisahs', 'seyhulislams', 'centuries', 'architects', 'countries'));
+        $avenues=Avenue::All();
+        $streets=Street::All();
+        $semts=Semt::All();
+        $neighborhoods=Neighborhood::All();
+        $districts=District::All();
+        $villages=Village::All();
+        $statuses=Status::All();
+        return view(
+            'back.articles.create',
+            compact('categories', 'makers', 'cities', 'padisahs', 'seyhulislams', 'centuries', 'architects', 'countries', 'avenues', 'streets', 'semts', 'neighborhoods', 'districts', 'villages', 'statuses')
+        );
     }
 
     /**
@@ -74,11 +92,18 @@ class ArticleController extends Controller
         $article->seyhulislam_id=$request->seyhulislam;
         $article->architect_id=$request->architect;
         $article->century_id=$request->century;
-        $article->country_id=$request->country;
         $article->year=$request->year;
         $article->content=$request->content;
         $article->maker_id=$request->maker;
+        $article->country_id=$request->country;
         $article->city_id=$request->city;
+        $article->semt_id=$request->semt;
+        $article->neighborhood_id=$request->neighborhood;
+        $article->avenue_id=$request->avenue;
+        $article->street_id=$request->street;
+        $article->district_id=$request->district;
+        $article->village_id=$request->village;
+        $article->status_id=$request->status;
         $article->fullAddress=$request->fullAddress;
         $article->slug=Str::slug($request->title);
 
@@ -144,7 +169,17 @@ class ArticleController extends Controller
         $countries=Country::All();
         $architects=Architect::All();
         $cities=City::All();
-        return view('back.articles.update', compact('categories', 'makers', 'cities', 'article', 'padisahs', 'seyhulislams', 'centuries', 'architects', 'countries'));
+        $avenues=Avenue::All();
+        $streets=Street::All();
+        $semts=Semt::All();
+        $neighborhoods=Neighborhood::All();
+        $districts=District::All();
+        $villages=Village::All();
+        $statuses=Status::All();
+        return view(
+            'back.articles.update',
+            compact('categories', 'makers', 'cities', 'article', 'padisahs', 'seyhulislams', 'centuries', 'architects', 'countries', 'avenues', 'streets', 'semts', 'neighborhoods', 'districts', 'villages', 'statuses')
+        );
     }
 
     /**
@@ -180,6 +215,13 @@ class ArticleController extends Controller
         $article->maker_id=$request->maker;
         $article->country_id=$request->country;
         $article->city_id=$request->city;
+        $article->semt_id=$request->semt;
+        $article->neighborhood_id=$request->neighborhood;
+        $article->avenue_id=$request->avenue;
+        $article->street_id=$request->street;
+        $article->district_id=$request->district;
+        $article->village_id=$request->village;
+        $article->status_id=$request->status;
         $article->fullAddress=$request->fullAddress;
         $article->slug=Str::slug($request->title);
 

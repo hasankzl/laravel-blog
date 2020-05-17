@@ -13,7 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(countrySeeder::class);
         $this->call(citySeeder::class);
+        $this->call(semtSeeder::class);
+        $this->call(districtSeeder::class);
+        $this->call(villageSeeder::class);
+        $this->call(neighborhoodSeeder::class);
+        $this->call(avenueSeeder::class);
+        $this->call(streetSeeder::class);
         $this->call(addressSeeder::class);
+        $this->call(statusSeeder::class);
         $this->call(seyhulislamSeeder::class);
         $this->call(makerSeeder::class);
         $this->call(padisahSeeder::class);

@@ -13,7 +13,7 @@ class padisahSeeder extends Seeder
      */
     public function run()
     {
-        $names=['Osman Bey','1.Mehmed','Yavuz Sultan Selim','Kanuni'];
+        $names=['belirtilmedi','1.Mehmed','Yavuz Sultan Selim','Kanuni'];
         foreach ($names as $name) {
             DB::table('padisahs')->insert([
     'name'=>$name,

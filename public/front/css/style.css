@@ -2,6 +2,7 @@
   --main-link-color: white;
   --nav-color:rgba(100,160,111,1);
   --nav-bg-color:rgba(50,50,100,.1);
+  --dropdown-hover-color:rgba(100,50,100,1);
   --nav-link-color:rgba(50, 20,100, 0.7);
   --nav-link-hover-color: rgba(150, 20, 20, 1);
   --projects-bg:rgba(100, 0, 90, 0.5);
@@ -32,7 +33,7 @@ body{
   color:var(--nav-color);
 }
 .nav-link{
-  margin-left: 20px;
+  margin-left: 15px;
   color:var(--nav-link-color);
 }
 .nav-link:hover{
@@ -88,4 +89,19 @@ body{
   background-color: var(--nav-bg-color);
   font-weight: bold;
   color: rgba(80, 80, 150, 1);
+}
+.drop-link{
+  width: max-content;
+  max-width: 650px;
+}
+.drop-link-item{
+  white-space: unset;
+}
+.drop-link-item:hover{
+  color:var(--dropdown-hover-color);
+  font-size: 1.1em;
+  font-weight: unset;
+  transition: 1s;
+  border-radius: 5px;
+
 }

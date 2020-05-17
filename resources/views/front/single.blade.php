@@ -24,17 +24,11 @@
             </div>
             <div class="mb-4">
               Yaptıran :  <a href="{{$url.'?yaptiran='.$article->getMaker->slug}}"> {{$article->getMaker->name}}</a><br>
-
             </div>
-
             <div class="mb-4">
               Yüzyıl :  <a href="{{$url.'?yuzyil='.$article->getCentury->slug}}"> {{$article->getCentury->name.'  '.$article->year}}</a>
-
             </div>
-
             </p>
-
-
           <p class="post-meta">
             <div class="mb-4">
               Dönemin padişahı: <a href="{{$url.'?padisah='.$article->getPadisah->slug}}">{{$article->getPadisah->name}}</a><br>
@@ -57,24 +51,27 @@
     </div>
   </div>
 <br><hr><br>
-<div class="row  d-flex justify-content-center" >
-  @foreach($article->getImages as $key=>$image)
-  <div class="col-md-3" data-toggle="modal" data-target="#exampleModal" data-target="#carouselExample" >
-</a>
-<a data-toggle="modal" data-target="#a{{$image->id}}" href="#"><img  class="w-75 gallery-img" width="100"  src="{{asset($image->name)}}">
-    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="a{{$image->id}}" role="dialog" tabindex="-1">
-              <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-body mb-0 p-0">
-                      <img  class="w-100" src="{{asset($image->name)}}">
-                    </div>
-                </div>
-              </div>
-            </div>
+<div class="home">
+
+
+
+
+  <div class="demo-gallery">
+    <ul id="lightgallery" class="list-unstyled row  d-flex justify-content-center">
+          @foreach($article->getImages as $key=>$image)
+                <li class="col-md-2" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800"  data-src="{{asset($image->name)}}" data-sub-html="<h4>Yön tuşları ile resimler arasında geçiş yapabilirsiniz</h4>">
+                    <a href="">
+                      <img src="{{asset($image->name)}}"  class="img-responsive" style="height:150px" />
+                    </a>
+                </li>
+                @endforeach
+
+            </ul>
   </div>
-  @endforeach
 
 </div>
+
+
 <article class="content">
 <header class="mt-5 pt-2">
   <h2>{{$article->title}}</h2>
@@ -96,4 +93,18 @@
 
   </div>
 </div>
+@endsection
+@section('css')
+<link href="{{asset('front/')}}/css/lightgallery.css" rel="stylesheet"/>
+<link href="{{asset('front/')}}/css/single.css" rel="stylesheet"/>
+@endsection
+@section('js')
+<script type="text/javascript">
+       $(document).ready(function(){
+           $('#lightgallery').lightGallery();
+       });
+       </script>
+<script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"> </script>
+<script src="{{asset('front/')}}/js/jquery.mousewheel.min.js"></script>
+   <script src="{{asset('front/')}}/js/lightgallery-all.min.js"></script>
 @endsection

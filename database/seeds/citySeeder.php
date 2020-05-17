@@ -13,11 +13,12 @@ class citySeeder extends Seeder
      */
     public function run()
     {
-        $cities=['İstanbul','Ankara','İzmir','Bursa','Sakarya','Yalova'];
+        $cities=['belirtilmedi','Ankara','İzmir','Bursa','Sakarya','Yalova'];
         foreach ($cities as $city) {
             DB::table('cities')->insert([
       'name'=>$city,
       'slug'=>Str::slug($city),
+      'country_id'=>rand(1, 4),
       'created_at'=>now(),
       'updated_at'=>now(),
     ]);

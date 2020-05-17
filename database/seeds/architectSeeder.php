@@ -11,7 +11,7 @@ class architectSeeder extends Seeder
      */
     public function run()
     {
-        $names=['Mimar Sinan','Mimar Ali','Mimar Hasan','Mimar Halil','Mimar kim'];
+        $names=['belirtilmedi','Mimar Ali','Mimar Hasan','Mimar Halil','Mimar kim'];
         foreach ($names as $name) {
             DB::table('architects')->insert([
     'name'=>$name,

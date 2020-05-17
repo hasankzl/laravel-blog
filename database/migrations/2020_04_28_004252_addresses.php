@@ -13,15 +13,15 @@ class Addresses extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->string('fullAddress');
-            $table->unsignedBigInteger('city_id');
-            $table->timestamps();
-            $table->foreign('city_id')
-              ->references('id')
-              ->on('cities');
-        });
+        /*  Schema::create('addresses', function (Blueprint $table) {
+              $table->id();
+              $table->string('fullAddress');
+              $table->unsignedBigInteger('city_id');
+              $table->timestamps();
+              $table->foreign('city_id')
+                ->references('id')
+                ->on('cities');
+          });*/
     }
 
     /**

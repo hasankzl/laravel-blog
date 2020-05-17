@@ -14,7 +14,7 @@ class categorySeeder extends Seeder
      */
     public function run()
     {
-        $categories=['Camiler','Kervansaraylar','Mektepler','Mekanlar','Salonlar'];
+        $categories=['belirtilmedi','Kervansaraylar','Mektepler','Mekanlar','Salonlar'];
         $faker=Faker::create();
         foreach ($categories as $cat) {
             DB::table('categories')->insert([

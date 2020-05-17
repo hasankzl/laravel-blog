@@ -18,12 +18,19 @@ class Articles extends Migration
             $table->string('title');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('maker_id');
-            $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('architect_id');
             $table->unsignedBigInteger('padisah_id');
             $table->unsignedBigInteger('seyhulislam_id');
             $table->unsignedBigInteger('century_id');
+            $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('semt_id')->default(1);
+            $table->unsignedBigInteger('neighborhood_id')->default(1);
+            $table->unsignedBigInteger('avenue_id')->default(1);
+            $table->unsignedBigInteger('street_id')->default(1);
+            $table->unsignedBigInteger('district_id')->default(1);
+            $table->unsignedBigInteger('village_id')->default(1);
             $table->string('year');
             $table->string('fullAddress');
             $table->string('image');
@@ -65,6 +72,34 @@ class Articles extends Migration
             $table->foreign('country_id')
             ->references('id')
             ->on('countries');
+
+            $table->foreign('semt_id')
+            ->references('id')
+            ->on('semts');
+
+            $table->foreign('neighborhood_id')
+            ->references('id')
+            ->on('neighborhoods');
+
+            $table->foreign('avenue_id')
+            ->references('id')
+            ->on('avenues');
+
+            $table->foreign('street_id')
+            ->references('id')
+            ->on('streets');
+
+            $table->foreign('district_id')
+            ->references('id')
+            ->on('districts');
+
+            $table->foreign('village_id')
+            ->references('id')
+            ->on('villages');
+
+            $table->foreign('status_id')
+            ->references('id')
+            ->on('statuses');
         });
     }
 

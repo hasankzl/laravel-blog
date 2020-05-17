@@ -2,6 +2,10 @@
 @section(count($articles).' Yapı Bulundu')
 @section('content')
 
+
+
+@include('front.widgets.addressSearch')
+<div class="row">
         <div class="col-md-3 search">
   @include('front.widgets.category')
   @include('front.widgets.padisah')
@@ -11,7 +15,8 @@
   @include('front.widgets.maker')
   @include('front.widgets.city')
         </div>
-        <div class=" col-md-9 mx-auto">
+        <div class=" col-md-9 mx-auto mt-3">
+
           <div class="row">
 
           @if(isset($selected))
@@ -24,4 +29,14 @@
           </div>
         @include('front.widgets.articleList')
       </div>
+</div>
+@endsection
+@section('js')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('select[name="country"]').on('change',function(){
+
+
+  });
+</script>
 @endsection

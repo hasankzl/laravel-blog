@@ -81,6 +81,18 @@
           <span>Mimarlar</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="yuzyillar") text-white  @endif" href="{{route('admin.century.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="yuzyillar") text-white  @endif"></i>
+          <span>Yüzyıllar</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="durum") text-white  @endif" href="{{route('admin.status.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="durum") text-white  @endif"></i>
+          <span>Durumlar</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed @if(Request::segment(2)=="ulkeler") text-white  @endif" href="{{route('admin.country.index')}}" aria-controls="collapseUtilities">
@@ -94,10 +106,44 @@
           <span>Şehirler</span>
         </a>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link collapsed @if(Request::segment(2)=="yuzyillar") text-white  @endif" href="{{route('admin.century.index')}}" aria-controls="collapseUtilities">
-          <i class="fas fa-list @if(Request::segment(2)=="yuzyillar") text-white  @endif"></i>
-          <span>Yüzyıllar</span>
+        <a class="nav-link collapsed @if(Request::segment(2)=="semt") text-white  @endif" href="{{route('admin.semt.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="semt") text-white  @endif"></i>
+          <span>Semt</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="ilçe") text-white  @endif" href="{{route('admin.district.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="ilçe") text-white  @endif"></i>
+          <span>İlçe</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="koy") text-white  @endif" href="{{route('admin.village.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="koy") text-white  @endif"></i>
+          <span>Köy</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="mahalle") text-white  @endif" href="{{route('admin.neighborhood.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="mahalle") text-white  @endif"></i>
+          <span>Mahalle</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="cadde") text-white  @endif" href="{{route('admin.avenue.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="cadde") text-white  @endif"></i>
+          <span>Cadde</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed @if(Request::segment(2)=="sokak") text-white  @endif" href="{{route('admin.street.index')}}" aria-controls="collapseUtilities">
+          <i class="fas fa-list @if(Request::segment(2)=="sokak") text-white  @endif"></i>
+          <span>Sokak</span>
         </a>
       </li>
 

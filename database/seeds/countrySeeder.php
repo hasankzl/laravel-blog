@@ -13,7 +13,7 @@ class countrySeeder extends Seeder
      */
     public function run()
     {
-        $countries=['Turkiye','Irak','Suriye','Yunanistan','Fas','Mısır'];
+        $countries=['belirtilmedi','Irak','Suriye','Yunanistan','Fas','Mısır'];
         foreach ($countries as $country) {
             DB::table('countries')->insert([
     'name'=>$country,

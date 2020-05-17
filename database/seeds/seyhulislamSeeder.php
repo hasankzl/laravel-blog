@@ -13,7 +13,7 @@ class seyhulislamSeeder extends Seeder
      */
     public function run()
     {
-        $names=['Şeyh edebali','Molla Fahrettin Acemi','Molla Gürâni','Zenbilli Ali Efendi'];
+        $names=['belirtilmedi','Molla Fahrettin Acemi','Molla Gürâni','Zenbilli Ali Efendi'];
         foreach ($names as $name) {
             DB::table('seyhulislams')->insert([
   'name'=>$name,
